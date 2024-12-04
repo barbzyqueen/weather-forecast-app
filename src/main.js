@@ -13,26 +13,33 @@ function refreshWeather(response){
   let humidityElement = document.querySelector("#humidity");
 
   let windSpeedElement = document.querySelector("#wind-speed");
+  
+  let timeElement = document.querySelector("#time");
+  let date = new Date(response.data.time * 1000);
+  
+  let iconElement = document.querySelector("#icon");
 
-  let timeElement = document.querySelector("#time")
-  let date = new Date(response.data.time * 1000)
 
-  //Inserting the temperature value received from the api in the div element
+  
+  
+  //Inserting the temperature value received from the api into the div element
   temperatureElement.innerHTML = Math.round(temperature);
   
-  // Inserting description value received from the api in the span element
+  // Inserting description value received from the api into the span element
   descriptionElement.innerHTML = response.data.condition.description;
-
+  
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
-
+  
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
+  
 
   timeElement.innerHTML = formatDate(date);
 
-  // console.log(windSpeedElement);
+  // Inserting the relevant icon image received from the api into the div element
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class = "weather-app-icon"/>`;
 
   // console.log(response.data);
-  // console.log(response.data["wind"]["speed"]);
+  // console.log(response.data.condition.icon_url);
   cityElement.innerHTML = response.data.city;
 }
 
