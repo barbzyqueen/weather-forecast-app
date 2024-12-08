@@ -19,7 +19,7 @@ function refreshWeather(response){
   
   let iconElement = document.querySelector("#icon");
 
-
+  getForecast(response.data.city);
   
   
   //Inserting the temperature value received from the api into the div element
@@ -102,13 +102,22 @@ searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Port Harcourt");
 
+// b2a5adcct04b33178913oc335f405433;
+// d43cbfbdb54f0ta69db39f9bfdoa56be;
+function getForecast(city){
+  let apiKey = "d43cbfbdb54f0ta69db39f9bfdoa56be";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayForecast);
+  console.log(apiUrl);
+
+}
 
 
 
 
-function displayForecast(){
+function displayForecast(response){
     
-    
+    console.log(response)
     let days = ["Tue", "Wed", "Thur", "Fri", "Sat"];
     let forecastHTML ="";
     
@@ -144,6 +153,7 @@ function displayForecast(){
 
 
 displayForecast();
+
 
 
 
