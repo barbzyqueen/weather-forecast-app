@@ -95,6 +95,14 @@ function handleSearchSubmit(event) {
 //   cityElement.innerHTML = searchInput.value;
 
   searchCity(searchInput.value)
+
+}
+
+function formatDay(timestamp){
+  let date = new Date(timestamp * 1000)
+  let days = ['Sun', "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  
+  return days[date.getDay()];
 }
 
 let searchFormElement = document.querySelector("#search-form")
@@ -118,33 +126,45 @@ function getForecast(city){
 function displayForecast(response){
     
     console.log(response)
-    let days = ["Tue", "Wed", "Thur", "Fri", "Sat"];
+    // let days = ["Tue", "Wed", "Thur", "Fri", "Sat"];
+   
     let forecastHTML ="";
     
-    days.forEach(function(day){
-    forecastHTML = forecastHTML +
-     `
-                <div class="weather-forecast-day">
-                      <div class="weather-forecast-date">
-                         ${day}
-                      </div>
-                      <div class="weather-forecast-icon">
-                          🌤️
-                      </div>
+     response.data.daily.forEach(function(day, index){
+      if (index < 5){
 
-                      <div class="weather-forecast-temperatures">
-                          <div class="weather-forecast-temperature">
-                              <strong>15 °C </strong>
-                          </div>
-                          <div class="weather-forecast-temperature">
-                              <strong>9 °C </strong>
-                          </div>
-                      </div>
-                  </div>
-
-                                    
-
-     `;
+        
+          forecastHTML =
+            forecastHTML +
+            `
+                      <div class="weather-forecast-day">
+                            <div class="weather-forecast-date">
+                              ${formatDay(day.time)}
+                            </div>
+                            
+                              <img src="${
+                                day.condition.icon_url
+                              }" class="weather-forecast-icon"/>
+                          
+      
+                            <div class="weather-forecast-temperatures">
+                                <div class="weather-forecast-temperature">
+                                    <strong>${Math.round(
+                                      day.temperature.maximum
+                                    )} ° </strong>
+                                </div>
+                                <div class="weather-forecast-temperature">
+                                    <strong>  ${Math.round(
+                                      day.temperature.minimum
+                                    )} °</strong>
+                                </div>
+                            </div>
+                        </div>
+      
+                                          
+      
+          `;
+      }
   });
 
   let forecastElement = document.querySelector("#forecast");
