@@ -13,5 +13,5 @@ This project was completed as the final activity required for completing the She
 
 
 ### Weather Forecast App URL
-Click <a href="https://barbzy-weather-forecast-app.netlify.app/" target="_blank"> here </a> to check the Weather Forecast App
+Click <a href="https://barbzy-weather-forecast-app.netlify.app/" target="_blank">here</a> to check the Weather Forecast App
 
